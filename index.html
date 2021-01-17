@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>VRCログ解析くん</title>
+    <meta name="description" content="VRCのログを解析します">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+    <link rel="stylesheet" href="style.css">
+       -->
+</head>
+
+<body>
+    <h1>VRCログ解析くん</h1>
+
+    <p>下のファイルの選択で，C:\Users\[ユーザ名]\AppData\LocalLow\VRChat\VRChat\output_log_xx-xx-xx.txtを選択してアップロードしてください．</p>
+    <div id="Log_Area">
+
+    <form name="test">
+        <input type="file" id="selfile"><br>
+        <textarea name="txt" rows="100" cols="100" readonly></textarea>
+    </form>
+
+    <script src="Analysis.js"></script>
+
+    <footer>フッター</footer>
+</body>
+
+</html>
