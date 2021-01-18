@@ -66,8 +66,8 @@ file_input.addEventListener("change",function(evt){
 }, false);
 
 function get_date_and_time_from_sentence( sentence ){
-    const splited_log = sentence.split(" ")
-    return splited_log[0] + " " + splited_sentence[1]
+    const splited_sentence = sentence.split(" ")
+    return splited_sentence[0] + " " + splited_sentence[1]
 }
 
 function is_enter_room_log(sentence){
