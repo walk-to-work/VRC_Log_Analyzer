@@ -15,42 +15,42 @@ file_input.addEventListener("change",function(evt){
     //読込終了後の処理
     reader.onload = function (ev) {
         const loaded_text_data = reader.result
-        const splited_sentence = loaded_text_data.split("\n")
+        const splited_log = loaded_text_data.split("\n")
         
         let in_room_flag = 0;
         let players_info = [];
         let room_name = ""
-        splited_sentence.forEach(element => {
-            if ( is_enter_room_log(element) ){
+        splited_log.forEach(sentence => {
+            if ( is_enter_room_log(sentence) ){
                 in_room_flag = true;
-                room_name = extract_room_name(element)
+                room_name = extract_room_name(sentence)
             }
             
             if( in_room_flag ){
 
                 // Join Room
-                if( is_join_log(element) ){
-                    let player_name = extract_join_room_player_name ( element )
-                    let join_room_time = get_date_and_time_from_sentence(element)
+                if( is_join_log(sentence) ){
+                    let player_name = extract_join_room_player_name ( sentence )
+                    let join_room_time = get_date_and_time_from_sentence(sentence)
                     players_info.push( join_room_time + " [入室] " + player_name + "\n")
                 }
                 
                 // Other Player Left Room 
-                if( is_other_player_left_log(element) )
+                if( is_other_player_left_log(sentence) )
                 {
-                    let player_name = extract_left_room_player_name( element )
-                    let left_room_time = get_date_and_time_from_sentence(element)
+                    let player_name = extract_left_room_player_name( sentence )
+                    let left_room_time = get_date_and_time_from_sentence(sentence)
                     players_info.push( left_room_time + " [退室] " +  player_name + "\n")
                 }
 
                 // You Letf Room
-                if (is_left_room_log(element)) {
+                if (is_left_room_log(sentence)) {
                     in_room_flag = false;
 
                     document.test.txt.value += "ルーム名：" + room_name +'\n'
 
-                    players_info.forEach( element => {
-                        document.test.txt.value += element
+                    players_info.forEach( info => {
+                        document.test.txt.value += info
                     });
 
                     document.test.txt.value += "\n"
@@ -66,24 +66,24 @@ file_input.addEventListener("change",function(evt){
 }, false);
 
 function get_date_and_time_from_sentence( sentence ){
-    const splited_sentence = sentence.split(" ")
-    return splited_sentence[0] + " " + splited_sentence[1]
+    const splited_log = sentence.split(" ")
+    return splited_log[0] + " " + splited_sentence[1]
 }
 
-function is_enter_room_log(log){
-    return log.match('Entering Room')
+function is_enter_room_log(sentence){
+    return sentence.match('Entering Room')
 }
 
-function is_join_log(log) {
-    return log.match('Initialized PlayerAPI')
+function is_join_log(sentence) {
+    return sentence.match('Initialized PlayerAPI')
 }
 
-function is_other_player_left_log(log) {
-    return log.match('PlayerManager')
+function is_other_player_left_log(sentence) {
+    return sentence.match('PlayerManager')
 }
 
-function is_left_room_log(log){
-    return log.match('Successfully left room')
+function is_left_room_log(sentence){
+    return sentence.match('Successfully left room')
 }
 
 function extract_room_name( sentence ){         // "Room:"以降の文字列を返す
