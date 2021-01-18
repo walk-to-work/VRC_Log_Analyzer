@@ -1,6 +1,6 @@
+/*! Analysis.js | MIT License | https://github.com/walk-to-work/VRC_Log_Analyzer/blob/main/LICENSE */
 
 var file_input = document.getElementById("selfile");
-
 
 //ダイアログでファイルが選択された時
 file_input.addEventListener("change",function(evt){
